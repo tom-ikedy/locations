@@ -1,29 +1,56 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    props: true,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: '/regaccount',
+    name: 'RegAccount',
+    component: () => import('@/views/RegAccount.vue'),
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+  },
+  {
+    path: '/user/:userId',
+    name: 'User',
+    component: () => import('@/views/User.vue'),
+    props: true,
+  },
+  {
+    path: '/user/:userId/userSetting',
+    name: 'UserSetting',
+    component: () => import('@/views/UserSetting.vue'),
+    props: true,
+  },
+  {
+    path: '/user/:userId/editShop/:shopId',
+    name: 'EditShop',
+    component: () => import('@/views/EditShop.vue'),
+    props: true,
+  },
+  {
+    path: '/user/:userId/shop/:shopId',
+    name: 'Shop',
+    component: () => import('@/views/Shop.vue'),
+    props: true,
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
