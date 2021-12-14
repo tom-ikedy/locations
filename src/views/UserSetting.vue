@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    onClickDeleteAccount() {
+    async onClickDeleteAccount() {
       const userid = this.$route.params.userId;
       const confirmMessage = 'アカウントを削除してもよろしいですか？';
 
@@ -31,7 +31,7 @@ export default {
         return;
       }
 
-      deleteAccount(userid);
+      await deleteAccount(userid);
 
       // トップページに遷移する
       this.$router.push('/');

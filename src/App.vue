@@ -61,19 +61,26 @@ export default {
   },
 
   created() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.currentUID = user.uid;
-      } else {
-        this.currentUID = null;
-      }
-    });
+    const user = firebase.auth().currentUser;
+    if (user) {
+      this.currentUID = user.uid;
+    } else {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.currentUID = user.uid;
+        } else {
+          this.currentUID = null;
+        }
+      });
+    }
+    /*
+    */
   },
 
   methods: {
-    onClickLogOut(e) {
+    async onClickLogOut(e) {
       e.preventDefault();
-      firebase
+      await firebase
         .auth()
         .signOut()
         .then(() => {
